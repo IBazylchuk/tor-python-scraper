@@ -1,11 +1,15 @@
 FROM python:3.10.1-alpine
 
-RUN apk update && apk add tor
+RUN apk update && apk add tor nginx
+
+RUN rm /etc/nginx/http.d/default.conf
+COPY ./nginx.conf /etc/nginx/http.d/site.conf
 
 ENV FIRST_SOCKS_PORT=9101
 ENV LAST_SOCKS_PORT=9199
 
 WORKDIR /app
+
 COPY . /app
 RUN pip --no-cache-dir install -r requirements.txt
 
@@ -18,4 +22,4 @@ ADD start.sh /
 RUN chmod +x /start.sh
 
 CMD ["/start.sh"]
-EXPOSE 5000
+EXPOSE 80
