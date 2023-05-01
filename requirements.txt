@@ -1,5 +1,5 @@
 cloudscraper==1.2.58
-Flask==2.0.2
+Flask==2.3.2
 lib==4.0.0
 requests[socks]>=2.10.0
 click==8.0.3
